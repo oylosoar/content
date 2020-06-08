@@ -600,8 +600,9 @@ def fetch_incidents():
     LOG.print_log()
     # end if no results returned
     if not alerts_raw_response or not alerts_raw_response.get('data'):
+        demisto.incidents([])
         return
-
+    
     alerts = alerts_raw_response.get('data', [])
     last_alert_created = parse_string_in_iso_format_to_datetime(last_run['last_created'])
     alert_creation_limit = parse_string_in_iso_format_to_datetime(last_run['last_created'])
